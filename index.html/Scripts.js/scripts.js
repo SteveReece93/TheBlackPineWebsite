@@ -73,7 +73,7 @@ function addToCart(itemName, quantity, price) {
 
 // Redirect to the home page when the Black Pine logo is clicked
 document.getElementById('blackPineLogo').addEventListener('click', function () {
-    window.location.href = 'home.html';
+    window.location.href = 'index.html';
 });
 
 // Get elements for the pizza popup
