@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Black Pine - Cart</title>
+    <link rel="stylesheet" href="Styles.css/blackpine.css/blackpine.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img id="blackPineLogo" src="icons/blackpinelogo.png" alt="Black Pine Logo" class="logo">
+
+            <h1>The Black Pine</h1>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="specials.html">Specials</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2>Your Cart</h2>
+            <p>Your selected items are listed below. Ready to checkout?</p>
+
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="cartItems">
+                    <!-- Cart items will be dynamically inserted here -->
+                </tbody>
+            </table>
+
+            <button class="checkout-button" id="checkoutButton">Proceed to Checkout</button>
+        </section>
+
+        <!-- Payment Popup Modal -->
+        <div id="paymentPopup" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <h2>Enter Payment Details</h2>
+                <form id="paymentForm">
+                    <label for="cardNumber">Card Number:</label>
+                    <input type="text" id="cardNumber" required><br><br>
+                    <label for="expiryDate">Expiry Date:</label>
+                    <input type="text" id="expiryDate" required><br><br>
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" required><br><br>
+                    <button type="submit" class="button">Confirm Order</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <!-- Social Media Links -->
+    <div class="social-media-links">
+        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+            <img src="icons/facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+            <img src="icons/twitter.png" alt="Twitter">
+        </a>
+    </div>
+    <footer>
+        <p>&copy; 2024 The Black Pine</p>
+    </footer>
+
+    <script>
+        const cartItemsElement = document.getElementById('cartItems');
+        const checkoutButton = document.getElementById('checkoutButton');
+        const paymentPopup = document.getElementById('paymentPopup');
+        const closePopupButton = document.querySelector('.popup .close');
+
+        // Load cart items from localStorage
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let totalPrice = 0;
+            cartItemsElement.innerHTML = '';
+
+            cart.forEach(item => {
+                const row = `
+                        <tr>
+                            <td>${item.name}</td>
+                            <td>${item.quantity}</td>
+                            <td>CAD$${item.price}</td>
+                            <td>CAD$${item.totalPrice}</td>
+                        </tr>`;
+                cartItemsElement.insertAdjacentHTML('beforeend', row);
+                totalPrice += parseFloat(item.totalPrice);
+            });
+
+            // Add total price row
+            const totalRow = `
+                    <tr>
+                        <td colspan="3">Total</td>
+                        <td>CAD$${totalPrice.toFixed(2)}</td>
+                    </tr>`;
+            cartItemsElement.insertAdjacentHTML('beforeend', totalRow);
+        }
+
+        // Checkout button opens the payment popup
+        checkoutButton.addEventListener('click', function () {
+            paymentPopup.style.display = 'flex';
+        });
+
+        // Close the payment popup
+        closePopupButton.addEventListener('click', function () {
+            paymentPopup.style.display = 'none';
+        });
+
+        // Handle payment form submission
+        document.getElementById('paymentForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Simulate sending order to POS
+            alert('Order has been placed successfully!');
+            localStorage.removeItem('cart');
+            window.location.href = 'confirmation.html'; // Redirect to confirmation page
+        });
+
+        // Load cart on page load
+        window.onload = loadCart;
+    </script>
+
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            max-width: 80%;
+            text-align: center;
+        }
+
+        .popup .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+            .button:hover {
+                background-color: #555;
+            }
+
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .cart-table th, .cart-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+            }
+
+            .cart-table th {
+                background-color: #f4f4f4;
+            }
+    </style>
+</body>
+</html>
