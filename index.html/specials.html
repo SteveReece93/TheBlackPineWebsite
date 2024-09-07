@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Black Pine - Specials</title>
+    <link rel="stylesheet" href="Styles.css/blackpine.css/blackpine.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img id="blackPineLogo" src="icons/blackpinelogo.png" alt="Black Pine Logo" class="logo">
+            <h1>The Black Pine</h1>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Menu.html">Menu</a></li>
+                <li><a href="specials.html">Specials</a></li>
+                <li><a href="Cart.html">Cart</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2>Our Specials</h2>
+            <p>Check out our exciting daily specials, crafted to give you more of what you love!</p>
+
+            <div class="menu-grid">
+                <!-- Brisket Bonanza -->
+                <div class="menu-item" onclick="openBrisketBonanzaPopup()">
+                    <img src="images/homebrisket.jpg" alt="Brisket Special">
+                    <h3>Brisket Bonanza</h3>
+                    <p>Slow-smoked brisket, crispy onions, and signature BBQ drizzle.</p>
+                    <span class="price">CAD$19.99</span>
+                </div>
+
+                <!-- 2-for-1 Pizza -->
+                <div class="menu-item" onclick="openTwoForOnePizzaPopup()">
+                    <img src="images/2for1pizza.jpg" alt="2 for 1 Pizza">
+                    <h3>2-for-1 Pizza</h3>
+                    <p>Choose any two large pizzas for the price of one!</p>
+                    <span class="price">CAD$29.95</span>
+                </div>
+
+                <!-- Wing Wednesday -->
+                <div class="menu-item" onclick="openWingsSpecialPopup()">
+                    <img src="images/wings10.jpg" alt="Wing Special">
+                    <h3>Wing Wednesday</h3>
+                    <p>Get a 10-pack of wings with any pizza purchase!</p>
+                    <span class="price">CAD$5.00 with any pizza</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 2-for-1 Pizza Popup -->
+    <div id="twoForOnePizzaPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('twoForOnePizzaPopup')">&times;</span>
+            <h2>2-for-1 Pizza</h2>
+            <p>Choose any two pizzas for CAD$29.95</p>
+            <select id="pizza1Dropdown">
+                <option value="Margherita">Margherita</option>
+                <option value="Pepperoni">Pepperoni</option>
+                <option value="BBQ Chicken">BBQ Chicken</option>
+                <!-- Add more pizza options here -->
+            </select>
+            <select id="pizza2Dropdown">
+                <option value="Margherita">Margherita</option>
+                <option value="Pepperoni">Pepperoni</option>
+                <option value="BBQ Chicken">BBQ Chicken</option>
+                <!-- Add more pizza options here -->
+            </select>
+            <button onclick="calculatePizzaPrice()">Calculate Total Price</button>
+            <button onclick="addToCart('2-for-1 Pizza', 2, '29.95')">Add to Cart</button>
+            <button onclick="window.location.href = 'cart.html'">Go to Cart</button>
+        </div>
+    </div>
+
+    <!-- Wing Wednesday Special Popup -->
+    <div id="wingsSpecialPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('wingsSpecialPopup')">&times;</span>
+            <h2>Wing Wednesday Special</h2>
+            <p>10-pack of wings for CAD$5.00 with your medium pizza purchase!</p>
+            <button onclick="addToCart('Wing Wednesday Special', 1, 'wings with medium pizza')">Add to Cart</button>
+            <button onclick="window.location.href = 'cart.html'">Go to Cart</button>
+        </div>
+    </div>
+
+    <!-- Brisket Bonanza Popup -->
+    <div id="brisketBonanzaPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('brisketBonanzaPopup')">&times;</span>
+            <h2>Brisket Bonanza</h2>
+            <p>Slow-smoked brisket, crispy onions, and signature BBQ drizzle for CAD$19.99.</p>
+            <button onclick="addToCart('Brisket Bonanza', 1, '19.99')">Add to Cart</button>
+            <button onclick="window.location.href = 'cart.html'">Go to Cart</button>
+        </div>
+    </div>
+
+    <!-- Overlay for popups -->
+    <div id="popupOverlay" class="popup-overlay"></div>
+
+    <script src="scripts.js/scripts.js"></script>
+    <!-- Social Media Links -->
+    <div class="social-media-links">
+        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+            <img src="icons/facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+            <img src="icons/twitter.png" alt="Twitter">
+        </a>
+    </div>
+    <footer>
+        <p>&copy; 2024 The Black Pine</p>
+    </footer>
+</body>
+</html>
+
+
