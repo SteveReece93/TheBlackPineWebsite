@@ -26,7 +26,7 @@
         </nav>
     </header>
 
-    <main>
+       <main>
         <section class="content-section">
             <h2>Your Cart</h2>
             <p>Your selected items are listed below. Ready to checkout?</p>
@@ -65,15 +65,17 @@
             </div>
         </div>
     </main>
+
     <!-- Social Media Links -->
     <div class="social-media-links">
         <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
-            <img src="Icons/facebook.png" alt="Facebook">
+            <img src="icons/facebook.png" alt="Facebook">
         </a>
         <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
-            <img src="Icons/twitter.png" alt="Twitter">
+            <img src="icons/twitter.png" alt="Twitter">
         </a>
     </div>
+
     <footer>
         <p>&copy; 2024 The Black Pine</p>
     </footer>
@@ -92,22 +94,22 @@
 
             cart.forEach(item => {
                 const row = `
-                        <tr>
-                            <td>${item.name}</td>
-                            <td>${item.quantity}</td>
-                            <td>CAD$${item.price}</td>
-                            <td>CAD$${item.totalPrice}</td>
-                        </tr>`;
+                            <tr>
+                                <td>${item.name}</td>
+                                <td>${item.quantity}</td>
+                                <td>CAD$${item.price}</td>
+                                <td>CAD$${item.totalPrice}</td>
+                            </tr>`;
                 cartItemsElement.insertAdjacentHTML('beforeend', row);
                 totalPrice += parseFloat(item.totalPrice);
             });
 
             // Add total price row
             const totalRow = `
-                    <tr>
-                        <td colspan="3">Total</td>
-                        <td>CAD$${totalPrice.toFixed(2)}</td>
-                    </tr>`;
+                        <tr>
+                            <td colspan="3">Total</td>
+                            <td>CAD$${totalPrice.toFixed(2)}</td>
+                        </tr>`;
             cartItemsElement.insertAdjacentHTML('beforeend', totalRow);
         }
 
@@ -134,65 +136,5 @@
         // Load cart on page load
         window.onload = loadCart;
     </script>
-
-    <style>
-        .popup {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            width: 300px;
-            max-width: 80%;
-            text-align: center;
-        }
-
-        .popup .close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 30px;
-            cursor: pointer;
-        }
-
-        .button {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-            .button:hover {
-                background-color: #555;
-            }
-
-        .cart-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-            .cart-table th, .cart-table td {
-                border: 1px solid #ddd;
-                padding: 8px;
-                text-align: center;
-            }
-
-            .cart-table th {
-                background-color: #f4f4f4;
-            }
-    </style>
 </body>
 </html>
