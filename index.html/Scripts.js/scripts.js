@@ -41,7 +41,6 @@ function openBrisketBonanzaPopup() {
 
 // Simulate medium pizza purchase check (this would be more complex with a real cart system)
 function mediumPizzaPurchased() {
-    // Check if a medium pizza was added to the cart (dummy condition here)
     return true; // Simulate that a medium pizza has been purchased
 }
 
@@ -49,7 +48,6 @@ function mediumPizzaPurchased() {
 function calculatePizzaPrice() {
     const pizza1Price = getPizzaPrice(document.getElementById('pizza1Dropdown').value);
     const pizza2Price = getPizzaPrice(document.getElementById('pizza2Dropdown').value);
-
     const highestPrice = Math.max(pizza1Price, pizza2Price);
     alert(`You pay CAD$${highestPrice.toFixed(2)} for the 2-for-1 Pizza deal.`);
 }
@@ -62,7 +60,6 @@ function getPizzaPrice(pizzaName) {
         "BBQ Chicken": 24.00,
         // Add other pizza prices here...
     };
-
     return pizzaPrices[pizzaName] || 20.00; // Default to 20.00 if not found
 }
 
@@ -73,7 +70,7 @@ function addToCart(itemName, quantity, price) {
 
 // Redirect to the home page when the Black Pine logo is clicked
 document.getElementById('blackPineLogo').addEventListener('click', function () {
-    window.location.href = 'index.html';
+    window.location.href = 'home.html';
 });
 
 // Get elements for the pizza popup
@@ -202,16 +199,13 @@ let simpleQuantity = 1;
 let selectedFlavor = ''; // Variable to store the selected drink flavor
 
 // Function to open the simple popup for any category
-function openSimplePopup(itemName, isDrink = false) {
+function openSimplePopup(itemName, description, isDrink = false) {
     itemNameSimpleElement.textContent = itemName;
+    quantityInputSimple.value = simpleQuantity;
     quantityPopup.style.display = 'flex';
 
     // Show or hide the drink flavors dropdown based on whether it's a drink
-    if (isDrink) {
-        drinkFlavorsDropdown.style.display = 'block';
-    } else {
-        drinkFlavorsDropdown.style.display = 'none';
-    }
+    drinkFlavorsDropdown.style.display = isDrink ? 'block' : 'none';
 }
 
 // Event listener for the simple popup quantity buttons
@@ -236,7 +230,9 @@ drinkFlavorsDropdown.addEventListener('change', function () {
 document.querySelectorAll('#wings .menu-item, #appetizers .menu-item, #pasta .menu-item, #kids .menu-item, #desserts .menu-item, #entrees .menu-item, #salads .menu-item, #burgers-sandos .menu-item').forEach(item => {
     item.addEventListener('click', function () {
         const itemName = this.querySelector('h3').textContent; // Correctly select item name
-        openSimplePopup(itemName, false); // Non-drink items
+        const description = this.querySelector('p').textContent; // Get description
+        const price = this.querySelector('.price').textContent; // Get price
+        openSimplePopup(itemName, description, false); // Open simple popup with item details
     });
 });
 
@@ -244,7 +240,7 @@ document.querySelectorAll('#wings .menu-item, #appetizers .menu-item, #pasta .me
 document.querySelectorAll('#drinks .menu-item').forEach(item => {
     item.addEventListener('click', function () {
         const itemName = this.querySelector('h3').textContent; // Correctly select item name
-        openSimplePopup(itemName, true); // Drinks have the dropdown for flavors
+        openSimplePopup(itemName, '', true); // Drinks have the dropdown for flavors
     });
 });
 
@@ -256,22 +252,8 @@ closePopupButtonSimple.addEventListener('click', function () {
 // Add to cart functionality for the simple popup
 addToCartButtonSimple.addEventListener('click', function () {
     const itemName = itemNameSimpleElement.textContent;
-    const quantity = quantityInputSimple.value;
-
-    // Check if the item is a drink and a flavor is selected
-    if (drinkFlavorsDropdown.style.display === 'block' && !selectedFlavor) {
-        alert('Please select a drink flavor.');
-        return; // Prevent adding to cart without selecting a flavor
-    }
-
-    // Add the item and flavor to the cart (this can be done using localStorage or an array)
-    const flavorText = selectedFlavor ? ` (${selectedFlavor})` : '';
-    alert(`Added ${quantity} x ${itemName}${flavorText} to the cart.`);
-
-    // Reset flavor selection and close the popup
-    selectedFlavor = '';
+    alert(`Added ${simpleQuantity} x ${itemName} to the cart.`);
     quantityPopup.style.display = 'none';
-    drinkFlavorsDropdown.value = ''; // Reset the dropdown value
 });
 
 // Go to cart functionality for the simple popup
